@@ -17,8 +17,32 @@ function usersCreate(param){
 
     //TODO now HERE you have oUser object. Similar to xsjs/lib/user/user.xsjslib method doPost line 13
 
-
-    pStmt.close();
+	//Get Next Personnel Number
+	pStmt = param.connection.prepareStatement('select "test03::usid".NEXTVAL from dummy'); 
+	var result = pStmt.executeQuery();
+    
+    while (result.next()) {
+		oUser.id = result.getString(1);
+	}
+    
+    $.trace.error(JSON.stringify(oUser));
+	pStmt.close();
+	//Insert Record into DB Table and Temp Output Table
+	for( var i = 0; i<2; i++){
+		var pStmt;
+		if(i<1){
+			pStmt = param.connection.prepareStatement("insert into \"test03::User\" values(?,?)" );			
+		}else{
+			pStmt = param.connection.prepareStatement("TRUNCATE TABLE \"" + after + "\"" );
+			pStmt.executeUpdate();
+			pStmt.close();
+			pStmt = param.connection.prepareStatement("insert into \"" + after + "\" values(?,?)" );		
+		}
+		pStmt.setString(1, oUser.id.toString());
+		pStmt.setString(2, oUser.name.toString());		
+		pStmt.executeUpdate();
+		pStmt.close();
+	}
 }
 
 function recordSetToJSON(rs,rsName){
