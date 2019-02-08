@@ -3,7 +3,7 @@ service namespace "test03"{
     "test03::User" as "Users"
                 navigates("Users_2_Address" as "toAddress", "Users_2_Cars" as "toCars")
             create using "xsjs.user:usersCreate.xsjslib::usersCreate"
-            update forbidden
+            update using "xsjs.user:usersUpdate.xsjslib::usersUpdate"
             delete forbidden;
 
     "test03::ExtraInfo.Address" as "Address"
