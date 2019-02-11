@@ -1,0 +1,5 @@
+{
+  "xsappname": "test03",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application"
+}

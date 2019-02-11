@@ -1,0 +1,9 @@
+<mvc:View controllerName="user_create.controller.user_create" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		title="USER CREATE"		
+		class="sapUiResponsiveContentPadding">
+		<content>
+
+		</content>
+	</Page>
+</mvc:View>
