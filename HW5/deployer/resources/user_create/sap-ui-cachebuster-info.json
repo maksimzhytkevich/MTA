@@ -1,0 +1,17 @@
+{
+  "Component-dbg.js": 1549899384584,
+  "Component-preload.js": 1549899384628,
+  "Component.js": 1549624403443,
+  "controller/user_create-dbg.controller.js": 1549899384588,
+  "controller/user_create.controller.js": 1549625067227,
+  "css/style-dbg.css": 1549899384591,
+  "css/style.css": 1549899384420,
+  "di.code-validation.core_issues.json": 1549899384098,
+  "fragment/ConfirmDeleteDialog.fragment.xml": 1544182244000,
+  "index.html": 1549865467576,
+  "manifest-bundle.zip": 1549899384808,
+  "manifest.json": 1549891665345,
+  "resources.json": 1549899384719,
+  "view/user_create.view.xml": 1549626756630,
+  "xs-app.json": 1549897815221
+}

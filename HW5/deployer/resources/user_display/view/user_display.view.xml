@@ -1,0 +1,9 @@
+<mvc:View controllerName="user_display.controller.user_display" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		title="USER DISPLAY"		
+		class="sapUiResponsiveContentPadding">
+		<content>
+		
+		</content>
+	</Page>
+</mvc:View>
