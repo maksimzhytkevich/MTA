@@ -75,10 +75,10 @@
 			"users": {
 				"dataSource": "mainService",
 				"settings": {
-				"defaultBindingMode": "TwoWay",
-				"defaultCountMode": "Inline",
-				"useBatch": false,
-				"disableHeadRequestForToken": true
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Inline",
+					"useBatch": false,
+					"disableHeadRequestForToken": true
     			}
 			}
 		},

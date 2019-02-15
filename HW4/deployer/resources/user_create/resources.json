@@ -32,6 +32,10 @@
             "name": "fragment\\ConfirmDeleteDialog.fragment.xml"
         },
         {
+            "name": "i18n\\i18n.properties",
+            "raw": "i18n\\i18n.properties"
+        },
+        {
             "name": "index.html"
         },
         {
@@ -52,6 +56,10 @@
         },
         {
             "name": "tmp\\fragment\\ConfirmDeleteDialog.fragment.xml"
+        },
+        {
+            "name": "tmp\\i18n\\i18n.properties",
+            "raw": "i18n\\i18n.properties"
         },
         {
             "name": "tmp\\index.html"
