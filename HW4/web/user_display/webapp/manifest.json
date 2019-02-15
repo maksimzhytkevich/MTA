@@ -12,6 +12,15 @@
 		"sourceTemplate": {
 			"id": "html5moduletemplates.basicSAPUI5ApplicationProjectModule",
 			"version": "1.40.12"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "https://p2001081134trial-maksimzhytkevich-space1-router.cfapps.eu10.hana.ondemand.com/api/xsodata/himta.xsodata",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
 		}
 	},
 
@@ -62,6 +71,15 @@
 				"settings": {
 					"bundleName": "user_display.i18n.i18n"
 				}
+			},
+			"users": {
+				"dataSource": "mainService",
+				"settings": {
+				"defaultBindingMode": "TwoWay",
+				"defaultCountMode": "Inline",
+				"useBatch": false,
+				"disableHeadRequestForToken": true
+    			}
 			}
 		},
 		"resources": {

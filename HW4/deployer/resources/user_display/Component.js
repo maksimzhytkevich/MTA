@@ -1,7 +1,6 @@
 sap.ui.define([
-	"sap/ui/core/UIComponent",
-	"sap/ui/Device",
-], function (UIComponent, Device) {
+	"sap/ui/core/UIComponent"	
+], function (UIComponent) {
 	"use strict";
 
 	return UIComponent.extend("user_display.Component", {
@@ -18,7 +17,7 @@ sap.ui.define([
 		init: function () {
 			// call the base component's init function
 			console.log("component init");
-			UIComponent.prototype.init.apply(this, arguments);
+			UIComponent.prototype.init.apply(this, arguments);			
 		}
 	});
 });

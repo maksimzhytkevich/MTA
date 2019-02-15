@@ -29,6 +29,10 @@
             "name": "di.code-validation.core_issues.json"
         },
         {
+            "name": "i18n\\i18n.properties",
+            "raw": "i18n\\i18n.properties"
+        },
+        {
             "name": "index.html"
         },
         {
@@ -46,6 +50,10 @@
         },
         {
             "name": "tmp\\css\\style.css"
+        },
+        {
+            "name": "tmp\\i18n\\i18n.properties",
+            "raw": "i18n\\i18n.properties"
         },
         {
             "name": "tmp\\index.html"
