@@ -5,5 +5,8 @@ entity User {
     key usid : String(4);
     @Comment: 'Description'
     name : String(100);
-    
+    @Comment: 'Date of Creation'
+    creationDate : UTCDateTime;
+    @Comment: 'Date of Update'
+    updateDate : UTCDateTime;
 };

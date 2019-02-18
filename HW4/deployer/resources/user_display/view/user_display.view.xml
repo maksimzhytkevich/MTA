@@ -10,10 +10,16 @@
 									}">
 							<columns>
 								<Column id="idColumn">
-									<Text text="{ID}" />
-									</Column>
+									<Text text="ID" />
+								</Column>
 								<Column id="nameColumn">
-									<Text text="{Name}" />
+									<Text text="Name" />
+								</Column>
+								<Column id="createDate">
+									<Text text="Creation Date" />
+								</Column>
+								<Column id="updateDate">
+									<Text text="Update Date" />
 								</Column>												
 							</columns>
 							<items>
@@ -24,6 +30,12 @@
 									</cells>
 									<cells>
 										<Label text="{users>name}" />
+									</cells>
+									<cells>
+										<Label text="{users>creationDate}" />
+									</cells>
+									<cells>
+										<Label text="{users>updateDate}" />
 									</cells>																
 								</ColumnListItem>
 							</items>

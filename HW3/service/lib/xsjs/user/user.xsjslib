@@ -2,6 +2,9 @@ var user = function (connection) {
 
     const USER_TABLE = "test03::User";
     const USER_ID = "test03::usid";
+
+    const CREATION_DATE = "creationDate";
+    const UPADATE_DATE = "updateDate";
     
     this.doGet = function () {
         const result = connection.executeQuery(`SELECT * FROM "${USER_TABLE}"`);
@@ -16,7 +19,7 @@ var user = function (connection) {
     this.doPost = function (oUser) {
         //Get Next ID Number
         oUser.usid = getNextval(USER_ID);
-
+       
         //generate query
         const statement = createPreparedInsertStatement(USER_TABLE, oUser);
         //execute update
@@ -62,13 +65,25 @@ var user = function (connection) {
         let oResult = new Result();
 
         let sColumnList = '', sValueList = '';
+        
+        var currentDate = new Date();
 
         for(let key in oValueObject){
             sColumnList += `"${key}",`;
             oResult.aParams.push(key);
-            sValueList += "?, ";
-            oResult.aValues.push(oValueObject[key]);            
+            sValueList += "?, "; 
+            oResult.aValues.push(oValueObject[key]);  
         }
+
+        sColumnList += `"${CREATION_DATE}",`;
+        oResult.aParams.push(CREATION_DATE);
+        sValueList += "?, "; 
+        oResult.aValues.push(currentDate);
+
+        sColumnList += `"${UPADATE_DATE}",`;
+        oResult.aParams.push(UPADATE_DATE);
+        sValueList += "?, "; 
+        oResult.aValues.push(currentDate);        
 
         // Remove the last unnecessary comma and blank
         sColumnList = sColumnList.slice(0, -1);
@@ -80,10 +95,19 @@ var user = function (connection) {
         return oResult;
     };
 
+    var setCurrentDate = function(currentDate, targetDate){
+        sColumnList += `"${targetDate}",`;
+        oResult.aParams.push(targetDate);
+        sValueList += "?, "; 
+        oResult.aValues.push(currentDate);
+    }
+
     function createPreparedUpdateStatement(sTableName, oValueObject) {
         let oResult = new Result();
 
         let sColumnList = '', sValueList = '';
+
+        var currentDate = new Date();
 
         for(let key in oValueObject){
             sColumnList += `"${key}",`;
@@ -92,6 +116,11 @@ var user = function (connection) {
             oResult.aValues.push(oValueObject[key]);            
         }
         
+        sColumnList += `"${UPADATE_DATE}",`;
+        oResult.aParams.push(UPADATE_DATE);
+        sValueList += "?, "; 
+        oResult.aValues.push(currentDate); 
+
         // Remove the last unnecessary comma and blank
         sColumnList = sColumnList.slice(0, -1);
         sValueList = sValueList.slice(0, -2);
