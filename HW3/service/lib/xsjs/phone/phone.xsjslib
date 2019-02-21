@@ -1,13 +1,13 @@
-var user = function (connection) {
+var phone = function (connection) {
 
-    const USER_TABLE = "test03::User";
-    const USER_ID = "test03::usid";
+    const PHONE_TABLE = "test03::Phone";
+    const PHONE_ID = "test03::phid";
 
     const CREATION_DATE = "creationDate";
     const UPADATE_DATE = "updateDate";
     
     this.doGet = function () {
-        const result = connection.executeQuery(`SELECT * FROM "${USER_TABLE}"`);
+        const result = connection.executeQuery(`SELECT * FROM "${PHONE_TABLE}"`);
 
         result.forEach(x => $.trace.error(JSON.stringify(x)));
 
@@ -16,33 +16,33 @@ var user = function (connection) {
     };
 
 
-    this.doPost = function (oUser) {
+    this.doPost = function (oPhone) {
         //Get Next ID Number
-        oUser.usid = getNextval(USER_ID);
+        oPhone.phid = getNextval(PHONE_ID);
        
         //generate query
-        const statement = createPreparedInsertStatement(USER_TABLE, oUser);
+        const statement = createPreparedInsertStatement(PHONE_TABLE, oPhone);
         //execute update
         connection.executeUpdate(statement.sql, statement.aValues);
 
         connection.commit();
         $.response.status = $.net.http.CREATED;
-        $.response.setBody(JSON.stringify(oUser));
+        $.response.setBody(JSON.stringify(oPhone));
     };
 
 
-    this.doPut = function (oUser) {
-        const statement = createPreparedUpdateStatement(USER_TABLE, oUser);
+    this.doPut = function (oPhone) {
+        const statement = createPreparedUpdateStatement(PHONE_TABLE, oPhone);
         //execute update
         connection.executeUpdate(statement.sql, statement.aValues);
 
         connection.commit();
         $.response.status = $.net.http.OK;
-        $.response.setBody(JSON.stringify(oUser));
+        $.response.setBody(JSON.stringify(oPhone));
     };
 
-    this.doDelete = function (usid) {
-        const statement = createPreparedDeleteStatement(USER_TABLE, {usid: usid});
+    this.doDelete = function (phid) {
+        const statement = createPreparedDeleteStatement(PHONE_TABLE, {phid: phid});
         connection.executeUpdate(statement.sql, statement.aValues);
 
         connection.commit();
@@ -51,7 +51,7 @@ var user = function (connection) {
     };
 
     function getNextval(sSeqName) {
-        const statement = `select "${sSeqName}".NEXTVAL as "ID" from "${USER_TABLE}"`;
+        const statement = `select "${sSeqName}".NEXTVAL as "ID" from "${PHONE_TABLE}"`;
         const result = connection.executeQuery(statement);
 
         if (result.length > 0) {

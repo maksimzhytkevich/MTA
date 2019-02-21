@@ -1,0 +1,14 @@
+namespace test03;
+
+entity Phone {
+    @Comment: 'Id of Phone'
+    key phid : String(4);
+    @Comment: 'Brand'
+    brand : String(100);
+    @Comment: 'Model'
+    model : String(100);
+    @Comment: 'Date of Creation'
+    creationDate : UTCDateTime;
+    @Comment: 'Date of Update'
+    updateDate : UTCDateTime;
+};

@@ -1,5 +1,5 @@
-const Userlib = $.import('xsjs.user', 'user').user;
-const userLib = new Userlib($.hdb.getConnection({
+const Phonelib = $.import('xsjs.phone', 'phone').phone;
+const phoneLib = new Phonelib($.hdb.getConnection({
     treatDateAsUTC: true
 }));
 
@@ -8,19 +8,19 @@ const userLib = new Userlib($.hdb.getConnection({
         try {
             switch ($.request.method) {
                 case $.net.http.PUT : {
-                    userLib.doPut(JSON.parse($.request.body.asString()));
+                    phoneLib.doPut(JSON.parse($.request.body.asString()));
                     break;
                 }
                 case $.net.http.POST : {
-                    userLib.doPost(JSON.parse($.request.body.asString()));
+                    phoneLib.doPost(JSON.parse($.request.body.asString()));
                     break;
                 }
                 case $.net.http.DEL : {
-                    userLib.doDelete($.request.parameters.get("userid"));
+                    phoneLib.doDelete($.request.parameters.get("phoneid"));
                     break;
                 }
                 case $.net.http.GET : {
-                    userLib.doGet();
+                    phoneLib.doGet();
                     break;
                 }
                 default: {

@@ -2,49 +2,33 @@
   "format_version": 1,
   "imports": [
     {
-      "target_table": "test03::User",
+      "target_table": "test03::Phone",
       "source_data": {
         "data_type": "CSV",
-        "file_name": "test03::Users.csv",
+        "file_name": "test03::Phones.csv",
         "has_header": true
       },
       "import_settings": {
         "import_columns": [
-          "usid",
-          "name",
+          "phid",
+          "brand",
+          "model",
           "creationDate",
           "updateDate"
         ]
       }
     },
     {
-      "target_table": "test03::ExtraInfo.Address",
+      "target_table": "test03::ExtraInfo.Updates",
       "source_data": {
         "data_type": "CSV",
-        "file_name": "test03::Address.csv",
+        "file_name": "test03::Updates.csv",
         "has_header": true
       },
       "import_settings": {
         "import_columns": [
-					"usid",
-					"city",
-					"strt",
-					"hnum"
-        ]
-      }
-    },
-    {
-      "target_table": "test03::ExtraInfo.Cars",
-      "source_data": {
-        "data_type": "CSV",
-        "file_name": "test03::Cars.csv",
-        "has_header": true
-      },
-      "import_settings": {
-        "import_columns": [
-					"crid",
-          "usid",
-          "name"
+					"phid",
+					"descr"
         ]
       }
     }

@@ -1,4 +1,4 @@
-﻿ID: test03
+ID: test03
 _schema-version: 2.1
 version: 0.0.1
 
@@ -32,7 +32,7 @@ resources:
         parameters:
             service-plan: hdi-shared
             service: hanatrial
-            config: {schema: DB}
+            config: {schema: PHONESDB}
         properties:
             hdi-container-name: '${service-name}'
         type: com.sap.xs.hdi-container
