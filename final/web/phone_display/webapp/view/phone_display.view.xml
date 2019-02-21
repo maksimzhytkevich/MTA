@@ -1,0 +1,58 @@
+<mvc:View controllerName="phone_display.controller.phone_display" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc">
+	<Shell>
+		<App id="home">
+			<Page
+				title="PHONE DISPLAY">
+				<Panel>
+					<Button icon="sap-icon://add" text="Create" press="openDialog" />
+				</Panel>
+				<Panel class="sapUiResponsiveMargin" width="auto">
+					<content>						
+						<Table id="phoneTable" items="{
+										path: 'phones>/Phones'
+									}"
+									mode="SingleSelect">
+							<columns>
+								<Column id="idColumn" width="10%">
+									<Text text="ID" />
+								</Column>
+								<Column id="brandColumn" width="10%">
+									<Text text="Brand" />
+								</Column>
+								<Column id="modelColumn" width="10%">
+									<Text text="Model" />
+								</Column>
+								<Column id="createDate" width="40%">
+									<Text text="Creation Date" />
+								</Column>
+								<Column id="updateDate" width="40%">
+									<Text text="Update Date" />
+								</Column>												
+							</columns>
+							<items>
+								<ColumnListItem
+									id="row">
+									<cells>
+										<Text text="{phones>phid}" />
+									</cells>
+									<cells>
+										<Text text="{phones>brand}" />
+									</cells>
+									<cells>
+										<Text text="{phones>model}" />
+									</cells>
+									<cells>
+										<Text text="{phones>creationDate}" />
+									</cells>
+									<cells>
+										<Text text="{phones>updateDate}" />
+									</cells>																									
+								</ColumnListItem>
+							</items>
+						</Table>	
+					</content>
+				</Panel>
+			</Page>
+		</App>
+	</Shell>
+</mvc:View>

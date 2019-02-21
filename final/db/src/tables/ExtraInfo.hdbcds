@@ -1,0 +1,14 @@
+﻿namespace test03;
+using test03::Phone;
+
+context ExtraInfo{
+
+		entity Updates {
+    		@Comment: 'Id of Update'
+		    key upid : Integer64 generated always as identity ( start with 1 increment by 1 );
+		    @Comment: 'Id of Phone'
+		    phid : String(4);
+		    @Comment: 'Description'
+		    descr : String(100);
+		}
+};

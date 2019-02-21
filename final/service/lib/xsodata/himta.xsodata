@@ -1,0 +1,16 @@
+service namespace "test03"{
+
+    "test03::Phone" as "Phones"
+                navigates("Phones_2_Updates" as "toUpdates")
+            create using "xsjs.phone:phoneCreate.xsjslib::phoneCreate"
+            update using "xsjs.phone:phoneUpdate.xsjslib::phoneUpdate"
+            delete forbidden;
+
+    "test03::ExtraInfo.Updates" as "Updates"
+            create forbidden
+            update forbidden
+            delete forbidden;    
+
+    association "Phones_2_Updates" principal "Phones"("phid")
+            multiplicity "1" dependent "Updates"("phid") multiplicity "*";
+}
