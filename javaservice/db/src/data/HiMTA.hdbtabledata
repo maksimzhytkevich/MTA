@@ -1,0 +1,37 @@
+{
+  "format_version": 1,
+  "imports": [
+    {
+      "target_table": "test03::User",
+      "source_data": {
+        "data_type": "CSV",
+        "file_name": "test03::Users.csv",
+        "has_header": true
+      },
+      "import_settings": {
+        "import_columns": [
+          "usid",
+          "name",
+          "creationDate",
+          "updateDate"
+        ]
+      }
+    },
+    {
+      "target_table": "test03::Address",
+      "source_data": {
+        "data_type": "CSV",
+        "file_name": "test03::Address.csv",
+        "has_header": true
+      },
+      "import_settings": {
+        "import_columns": [
+					"usid",
+					"city",
+					"strt",
+					"hnum"
+        ]
+      }
+    }    
+  ]
+}
