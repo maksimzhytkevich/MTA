@@ -4,23 +4,23 @@
    xmlns:l="sap.ui.layout" >
    <Dialog
       id="createUpdateDialog"
-      title="Enter Phone Info">
+      title="{i18n>dialogTitle}">
       <l:VerticalLayout>
          <l:content>
-            <Label text="Brand name" labelFor="brandNameInput" class="sapUiSmallMarginBeginEnd" />
+            <Label text="{i18n>dialogLabelBrand}" labelFor="brandNameInput" class="sapUiSmallMarginBeginEnd" />
             <Input id="brandNameInput" width="300px" required="true" class="sapUiSmallMarginBeginEnd"/>
-            <Label text="Model name" labelFor="modelNameInput" class="sapUiSmallMarginBeginEnd"/>
+            <Label text="{i18n>dialogLabelModel}" labelFor="modelNameInput" class="sapUiSmallMarginBeginEnd"/>
             <Input id="modelNameInput" width="300px" required="true" class="sapUiSmallMarginBeginEnd"/>
          </l:content>
       </l:VerticalLayout>
       <beginButton>
          <Button
-            text="OK"
-            press="createPhone"/> 
+            id="bt_ok"
+            text="{i18n>btOK}"/> 
       </beginButton>
       <endButton>
       <Button
-            text="Cancel"
+            text="{i18n>btCancel}"
             press="onCloseDialog"/> 
       </endButton>
    </Dialog>

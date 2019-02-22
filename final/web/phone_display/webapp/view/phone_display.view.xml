@@ -2,9 +2,11 @@
 	<Shell>
 		<App id="home">
 			<Page
-				title="PHONE DISPLAY">
+				title="{i18n>pageTitle}">
 				<Panel>
-					<Button icon="sap-icon://add" text="Create" press="openDialog" />
+					<Button id="bt_create" icon="sap-icon://add" text="{i18n>btCreate}" press="openDialog" />
+					<Button id="bt_edit" icon="sap-icon://edit" text="{i18n>btEdit}" press="openDialog" class="sapUiSmallMarginBeginEnd"/>
+					<Button id="bt_delete" icon="sap-icon://delete" text="{i18n>btDelete}" press="deletePhone" />
 				</Panel>
 				<Panel class="sapUiResponsiveMargin" width="auto">
 					<content>						
@@ -14,19 +16,19 @@
 									mode="SingleSelect">
 							<columns>
 								<Column id="idColumn" width="10%">
-									<Text text="ID" />
+									<Text text="{i18n>columnNameID}" />
 								</Column>
 								<Column id="brandColumn" width="10%">
-									<Text text="Brand" />
+									<Text text="{i18n>columnNameBrand}" />
 								</Column>
 								<Column id="modelColumn" width="10%">
-									<Text text="Model" />
+									<Text text="{i18n>columnNameModel}" />
 								</Column>
 								<Column id="createDate" width="40%">
-									<Text text="Creation Date" />
+									<Text text="{i18n>columnNameCreationDate}" />
 								</Column>
 								<Column id="updateDate" width="40%">
-									<Text text="Update Date" />
+									<Text text="{i18n>columnNameUpdateDate}" />
 								</Column>												
 							</columns>
 							<items>
