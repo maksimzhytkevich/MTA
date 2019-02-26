@@ -80,6 +80,10 @@
 					"useBatch": false,
 					"disableHeadRequestForToken": true
     			}
+			},
+			"screen_data": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "model/screen_data.json"
 			}
 		},
 		"resources": {

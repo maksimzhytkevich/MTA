@@ -8,50 +8,34 @@ sap.ui.define([
 	return Controller.extend("phone_display.controller.phone_display", {
 	
         onInit: function () {
-			jQuery.sap.log.debug("controller init");		
-		},		
-		 
-		onCloseDialog : function () {
-			this.getView().byId("createUpdateDialog").close();
+			jQuery.sap.log.debug("controller init");
+			this.oView = this.getView();
+			this.oModel = this.oView.getModel("phones");
+			this.screenData = this.oView.getModel("screen_data");
+			this.oTable = this.oView.byId("phoneTable");	
 		},
 
-		openDialog: function (oEvent) {
-			
-			var oView = this.getView();
-
-			if (!this.byId("createUpdateDialog")) {
+		openCreateDialog: function () {
+			var oView = this.oView;
+			if (!this.byId("createDialog")) {
 				Fragment.load({
-					id: oView.getId(),
-					name: "phone_display.view.create_update_dialog",
+					id: this.oView.getId(),
+					name: "phone_display.view.create_dialog",
 					controller: this
 				}).then(function (oDialog) {
 					oView.addDependent(oDialog);
 					oDialog.open();					
 				});
 			} else {
-				this.byId("createUpdateDialog").open();
-			}
-
-			var btOk = oView.byId("bt_ok");
-			
-			var pressedButton = oEvent.getSource().getId();
-
-			if (pressedButton.includes("bt_create")) {
-				btOk.attachPress(this.createPhone, this);
-			} else if (pressedButton.includes("bt_edit")) {
-				btOk.attachPress(this.updatePhone, this);
-			} else {
-				jQuery.sap.log.error("Error with attaching button handler");	
-			}								
+				this.byId("createDialog").open();
+			}							
 		},
 
 		createPhone: function () {
 
-			var brand = this.getView().byId("brandNameInput").getValue();			
-			var model = this.getView().byId("modelNameInput").getValue();
-
-			var oModel = this.getView().getModel("phones");
-
+			var brand = this.screenData.getProperty("/brandNameInput");
+			var model = this.screenData.getProperty("/modelNameInput");
+			
 			if (!brand || !model){
 				MessageToast.show("Fill all fields");	
 			} else {
@@ -60,7 +44,7 @@ sap.ui.define([
 				Phone.brand = brand;
 				Phone.model = model;
 
-				oModel.create("/Phones", Phone, {
+				this.oModel.create("/Phones", Phone, {
 					success: function(){
 						jQuery.sap.log.info("Sucsess");
 					},
@@ -68,20 +52,36 @@ sap.ui.define([
 						jQuery.sap.log.error("Error");
 					}
 				});
-			}	
+			}
+			this.onCloseCreateDialog();	
+		},				
+		 
+		onCloseCreateDialog : function () {
+			this.oView.byId("createDialog").close();
 		},
 
-		updatePhone: function() {
-			var oTable = this.getView().byId("phoneTable");
+		openUpdateDialog: function () {
+			var oView = this.oView;
+			if (!this.byId("updateDialog")) {
+				Fragment.load({
+					id: this.oView.getId(),
+					name: "phone_display.view.update_dialog",
+					controller: this
+				}).then(function (oDialog) {
+					oView.addDependent(oDialog);
+					oDialog.open();					
+				});
+			} else {
+				this.byId("updateDialog").open();
+			}							
+		},
 
-			var oSelectedItem = oTable.getSelectedItem();
+		updatePhone: function() {	
 
-			var brand = this.getView().byId("brandNameInput").getValue();			
-			var model = this.getView().byId("modelNameInput").getValue();	
-			
+			var oSelectedItem = this.oTable.getSelectedItem();
 
-			var oModel = this.getView().getModel("phones");
-			
+			var brand = this.screenData.getProperty("/brandNameInput");
+			var model = this.screenData.getProperty("/modelNameInput");						
 	
 			if (!oSelectedItem){
 				MessageToast.show("Phone is not selected!");
@@ -95,8 +95,8 @@ sap.ui.define([
 				Phone.model = model;
 				Phone.creationDate = null;
 				Phone.updateDate = null;
-
-				oModel.update("/Phones('" + phid + "')", Phone, {
+				
+				this.oModel.update("/Phones('" + phid + "')", Phone, {
 					merge: false,
 					success: function(){
 						jQuery.sap.log.info("Sucsess");
@@ -105,13 +105,17 @@ sap.ui.define([
 						jQuery.sap.log.error("Error");
 					}
 				});
-			}	
+			}
+			this.onCloseUpdateDialog();		
+		},
+
+		onCloseUpdateDialog : function () {
+			this.oView.byId("updateDialog").close();
 		},
 
 		deletePhone: function(){
-			var oTable = this.getView().byId("phoneTable");
-			
-			var oSelectedItem = oTable.getSelectedItem();			
+						
+			var oSelectedItem = this.oTable.getSelectedItem();			
 
 			if (!oSelectedItem){
 				MessageToast.show("Phone is not selected!");

@@ -4,8 +4,8 @@
 			<Page
 				title="{i18n>pageTitle}">
 				<Panel>
-					<Button id="bt_create" icon="sap-icon://add" text="{i18n>btCreate}" press="openDialog" />
-					<Button id="bt_edit" icon="sap-icon://edit" text="{i18n>btEdit}" press="openDialog" class="sapUiSmallMarginBeginEnd"/>
+					<Button id="bt_create" icon="sap-icon://add" text="{i18n>btCreate}" press="openCreateDialog" />
+					<Button id="bt_edit" icon="sap-icon://edit" text="{i18n>btEdit}" press="openUpdateDialog" class="sapUiSmallMarginBeginEnd"/>
 					<Button id="bt_delete" icon="sap-icon://delete" text="{i18n>btDelete}" press="deletePhone" />
 				</Panel>
 				<Panel class="sapUiResponsiveMargin" width="auto">
