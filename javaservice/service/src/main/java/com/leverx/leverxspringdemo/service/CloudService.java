@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.sap.cloud.sdk.cloudplatform.CloudPlatform;
 import com.sap.cloud.sdk.cloudplatform.ScpCfCloudPlatform;
@@ -27,22 +28,35 @@ public class CloudService {
 	
 	@Autowired
 	private CloudPlatform platform;
+		
+	@Autowired
+	private ScpCfCloudPlatform scpCfCloudPlatform;	
 	
 	@Autowired
-	private ScpCfCloudPlatform space_name;	
-
-	@Autowired
-	private ScpCfCloudPlatform dbSchema;
-	
-	@Autowired
-	private AuthTokenFacade token;
+	private AuthTokenFacade token;	
 	
 	public String getApplicationName() {
 		return platform.getApplicationName();
 	}
 	
 	public Map<String, JsonElement> getSpaceName() {
-		return space_name.getVcapApplication();
+		return scpCfCloudPlatform.getVcapApplication();
+	}
+	
+	public Map<String, JsonArray> getSchema() {
+		return scpCfCloudPlatform.getVcapServices();
+	}
+	
+	public Model getSpaceNameAndSchema(Model model) {
+		Map<String, JsonElement> vcap = getSpaceName();		
+		JsonElement sp = vcap.get("space_name");
+		JsonArray hanatrial = getSchema().get("hanatrial");
+		JsonElement schema = hanatrial.get(0).getAsJsonObject().get("credentials").getAsJsonObject().get("schema");
+		String appName = getApplicationName();
+		model.addAttribute("spaceName", sp.toString());
+		model.addAttribute("appName", appName);  
+		model.addAttribute("schema", schema);
+		return model;
 	}
 	
 	public Optional<AuthToken> getToken() {
@@ -59,9 +73,16 @@ public class CloudService {
 		return jo;
 	}
 	
-	public Map<String, JsonArray> getSchema() {
-		return dbSchema.getVcapServices();
-	}
+	public Model getTokenWithName(Model model) {		
+		Optional<AuthToken> token = getToken();
+		JsonObject jo = getInfo(token);
+		JsonElement name = jo.get("given_name");
+		JsonElement familyname = jo.get("family_name");
+		model.addAttribute("token", jo);
+		model.addAttribute("name", name);
+		model.addAttribute("familyname", familyname);
+		return model;
+	}	
 		
 	public List<Destination> getDestinations() {
 		List<Destination> destinationList = new ArrayList<Destination>();

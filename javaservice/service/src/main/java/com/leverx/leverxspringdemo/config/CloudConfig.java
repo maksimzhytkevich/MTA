@@ -17,14 +17,10 @@ public class CloudConfig {
 	}
 	
 	@Bean
-	public ScpCfCloudPlatform space_name() {
+	public ScpCfCloudPlatform scpCfCloudPlatform() {
 		return ScpCfCloudPlatform.getInstanceOrThrow();
 	}
-	
-	@Bean
-	public ScpCfCloudPlatform dbSchema() {
-		return ScpCfCloudPlatform.getInstanceOrThrow();
-	}
+
 	@Bean
 	public AuthTokenFacade token() {
 		return new AuthTokenFacade();
