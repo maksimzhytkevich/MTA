@@ -1,6 +1,7 @@
 package com.leverx.leverxspringdemo.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Person {
 	
@@ -11,6 +12,16 @@ public class Person {
 	private Timestamp creationDate;
 	
 	private Timestamp updateDate;
+	
+	private List<Address> addressList;
+
+	public List<Address> getAddressList() {
+		return addressList;
+	}
+
+	public void setAddressList(List<Address> addressList) {
+		this.addressList = addressList;
+	}
 
 	public String getId() {
 		return id;

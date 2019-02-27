@@ -19,6 +19,10 @@ public class PersonService {
 		return personDao.getAll();
 	}
 	
+	public List<String> getPersonAddress(String id) {
+		return personDao.getPersonAddress(id);		
+	}
+	
 	public Person getPerson(String id) {
 		Optional<Person> personOptional = this.personDao.getById(id);
 		Person person = null;

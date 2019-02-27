@@ -77,7 +77,7 @@ public class AddressDao implements IAddressDao  {
 	public void save(Address entity) {
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"INSERT INTO \"test03::Address\"(\"usid\", \"city\", \"strt\", \"nhum\", ) VALUES (?, ?, ?, ?)")) {
+						"INSERT INTO \"test03::Address\"(\"usid\", \"city\", \"strt\", \"hnum\") VALUES (?, ?, ?, ?)")) {
 			stmnt.setString(1, entity.getUserId());
 			stmnt.setString(2, entity.getCity());
 			stmnt.setString(3, entity.getStreet());

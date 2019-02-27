@@ -35,6 +35,11 @@ public class PersonController {
 		return personService.getPersonAll();
 	}
 	
+	@GetMapping(value="/personAddress/{id}")
+	public List<String> getPersonAddress(@PathVariable String id) {
+		return personService.getPersonAddress(id);
+	}
+	
 	@GetMapping(value="/person/{id}")
 	public Person getPerson(@PathVariable String id) {
 		return personService.getPerson(id);

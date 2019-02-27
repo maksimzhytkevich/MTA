@@ -22,6 +22,9 @@ import com.leverx.leverxspringdemo.domain.Person;
 public class PersonDao implements IPersonDao {
 
 	private static final Logger logger = LoggerFactory.getLogger(PersonDao.class);
+	
+	private static final String userTable = "test03::User";
+	private static final String addressTable = "test03::Address";
 
 	@Autowired
 	private DataSource dataSource;
@@ -31,7 +34,7 @@ public class PersonDao implements IPersonDao {
 		Optional<Person> entity = null;
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"SELECT TOP 1 * FROM \"test03::User\" WHERE \"usid\" = ?")) {
+						"SELECT TOP 1 * FROM \"" + userTable + "\" WHERE \"usid\" = ?")) {
 			stmnt.setString(1, id);
 			ResultSet result = stmnt.executeQuery();
 			if (result.next()) {
@@ -49,13 +52,30 @@ public class PersonDao implements IPersonDao {
 		}
 		return entity;
 	}
+	
+	public List<String> getPersonAddress(String id) {
+		List<String> list = new ArrayList<String>();
+		try (Connection conn = dataSource.getConnection();
+				PreparedStatement stmnt = conn.prepareStatement("SELECT * FROM \"" + userTable + "\" INNER JOIN \"" + addressTable + "\" ON \"" + userTable + "\".\"usid\" = \"" + addressTable + "\".\"usid\" WHERE \"" + userTable + "\".\"usid\" = ?")) {
+			stmnt.setString(1, id);
+			ResultSet result = stmnt.executeQuery();				
+			while (result.next()) {
+				list.add(result.getString("name"));
+				list.add(result.getString("city"));
+			}					
+		} catch (SQLException e) {
+			logger.error("Error while trying to get entity by Id: " + e.getMessage());
+		}
+		
+		return list;
+	}
 
 	@Override
 	public List<Person> getAll() {
 		List<Person> personList = new ArrayList<Person>();
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn
-						.prepareStatement("SELECT * FROM \"test03::User\"")) {
+						.prepareStatement("SELECT * FROM \"" + userTable + "\"")) {
 			ResultSet result = stmnt.executeQuery();
 			while (result.next()) {
 				Person person = new Person();
@@ -75,7 +95,7 @@ public class PersonDao implements IPersonDao {
 	public void save(Person entity) {
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"INSERT INTO \"test03::User\"(\"name\") VALUES (?)")) {
+						"INSERT INTO \"" + userTable + "\"(\"name\") VALUES (?)")) {
 			stmnt.setString(1, entity.getName());
 			stmnt.execute();
 		} catch (SQLException e) {
@@ -86,7 +106,7 @@ public class PersonDao implements IPersonDao {
 	@Override
 	public void delete(String id) {
 		try (Connection conn = dataSource.getConnection();
-				PreparedStatement stmnt = conn.prepareStatement("DELETE FROM \"test03::User\" WHERE \"usid\" = ?")) {
+				PreparedStatement stmnt = conn.prepareStatement("DELETE FROM \"" + userTable + "\" WHERE \"usid\" = ?")) {
 			stmnt.setString(1, id);
 			stmnt.execute();
 		} catch (SQLException e) {
@@ -98,7 +118,7 @@ public class PersonDao implements IPersonDao {
 	public void update(Person entity) {
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"UPDATE \"test03::User\" SET \"name\" = ? WHERE \"usid\" = ?")) {
+						"UPDATE \"" + userTable + "\" SET \"name\" = ? WHERE \"usid\" = ?")) {
 			stmnt.setString(1, entity.getName());
 			stmnt.setString(2, entity.getId());
 			stmnt.executeUpdate();
